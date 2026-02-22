@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="assets/favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <title>Weather App</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="search">
+        <input type="text" placeholder="Enter city name" id="search-city" />
+        <button id="submit-btn"><i class="fas fa-search"></i></button>
+      </div>
+      <div class="city-result">
+        <img src="assets/clear.png" alt="weather-image" id="weather-image" />
+        <p id="weather-conditions"></p>
+        <p id="city">kathmandu</p>
+        <p id="city-temp">0° C</p>
+      </div>
+      <div class="weather-details">
+        <div class="time">
+          <p id="time">Time</p>
+          <p id="time-result"></p>
+        </div>
+        <div class="humidity">
+          <p id="humidity">Humidity</p>
+          <p id="humidity-result"></p>
+        </div>
+        <div class="wind-speed">
+          <p id="wind">Wind</p>
+          <p id="wind-result"></p>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="app.js"></script>
+</html>
