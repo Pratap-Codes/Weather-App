@@ -1,7 +1,9 @@
-const apiKey = 'cbbc4a7bdb9df06f7409b640005180be'
-const apiUrl = 'https://api.openweathermap.org/data/2.5/weather?units=metric'
+const apiKey = 'cbbc4a7bdb9df06f7409b640005180be';
+const apiUrl = 'https://api.openweathermap.org/data/2.5/weather?units=metric';
 const searchCity = document.querySelector('#search-city');
 const submitBtn = document.querySelector('#submit-btn');
+const weatherImage = document.querySelector('#weather-image')
+
 
 async function checkWeather(city) {
     if (!city) return alert('Please enter the city name');
@@ -10,10 +12,9 @@ async function checkWeather(city) {
     let data = await response.json()
     console.log(data)
 
-    if(data.cod === '404'){
-       return alert('City not found');
+    if (data.cod === '404') {
+        return alert('City not found');
     }
-
 
     document.querySelector('#city').innerHTML = data.name
     document.querySelector('#city-temp').innerHTML = Math.floor(data.main.temp) + `° C`;
@@ -28,8 +29,7 @@ async function checkWeather(city) {
     hours = hours % 12;
     hours = hours ? hours : 12;
 
-    const formatTime = `${hours.toString().padStart(2, '0')}:` +
-        `${minutes.toString().padStart(2, '0')} ${ampm}`
+    const formatTime = `${hours.toString().padStart(2, '0')}:` + `${minutes.toString().padStart(2, '0')} ${ampm}`
 
     document.querySelector('#time-result').innerHTML = formatTime
 
@@ -40,18 +40,33 @@ async function checkWeather(city) {
     const windSpeed = data.wind.speed;
     document.querySelector('#wind-result').innerHTML = windSpeed + ` mph`;
 
-    const weatherConditions = data.weather[0].description
-        ;
+    const weatherConditions = data.weather[0].description;
     document.querySelector('#weather-conditions').innerHTML = weatherConditions;
 
-    // document.querySelector('#uv-result').innerHTML = 
-
+    if (data.weather[0].main == "Clear") {
+        weatherImage.src = 'assets/clear.png';
+    }
+    else if (data.weather[0].main == "Clouds") {
+        weatherImage.src = 'assets/clouds.png';
+    }
+    else if (data.weather[0].main == 'Rain') {
+        weatherImage.src = 'assets/rain.png';
+    }
+    else if (data.weather[0].main == 'Mist') {
+        weatherImage.src = 'assets/mist.png'
+    }
+    else if (data.weather[0].main == 'Snow') {
+        weatherImage.src = 'assets/snow.png'
+    }
 }
-
 submitBtn.addEventListener('click', () => {
     checkWeather(searchCity.value.trim());
 
 })
-
+searchCity.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        submitBtn.click();
+    }
+});
 searchCity.value = "Kathmandu"; // optional: show in input
 checkWeather(searchCity.value);
